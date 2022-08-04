@@ -48,7 +48,7 @@ const Landing = () => {
             </span>
           </NavLink>
           <div
-            className={`animate__animated animate__zoomInLeft w-full h-screen z-20 bg-slate-800 fixed top-2 left-0 ${sideBarState} flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
+            className={`animate__animated animate__zoomInLeft w-full h-screen z-20 bg-slate-800 fixed top-2 left-0 ${sideBarState} flex-col items-center gap-y-12 pt-24 md:top-0 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
           >
             <NavLink to="about" className="hover:text-gray-500">
               About Us
@@ -79,7 +79,7 @@ const Landing = () => {
             Cooking With Heart, Until it Becomes a Cake
           </h1>
           <NavLink
-            to="about"
+            to="login"
             className={`${hideAnime} animate__animated animate__rubberBand animate__delay-1s p-2 mt-2 bg-pink-500 hover:text-pink-500 hover:bg-transparent`}
           >
             Let's See Our Production
@@ -141,7 +141,7 @@ const Landing = () => {
             Oyinkansola Rita
           </span>
         </p>
-        <small className="italic">CE0 Empress Tee</small>
+        <small className="italic">CE0 <span className="font-bold">Empress Tee</span></small>
       </article>
       <footer className="py-2 bg-slate-900 text-white text-center">
         <p>&copy;{time}</p>

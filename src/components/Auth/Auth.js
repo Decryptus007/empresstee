@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
-import { app } from "../../firebaseConfig";
+import { NavLink, useNavigate } from "react-router-dom";
+// import { app } from "../../firebaseConfig";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,10 +9,13 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import Loading from "../Aux/Loading";
 
 export const Login = () => {
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState({});
   const [authMssg, setAuthMssg] = useState();
@@ -29,6 +32,7 @@ export const Login = () => {
     signInWithPopup(auth, googleProvider)
       .then((userData) => {
         console.log(userData.user);
+        navigate("/");
         setShowLoading(false);
       })
       .catch((err) => {
@@ -42,7 +46,8 @@ export const Login = () => {
     setShowLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userData) => {
-        console.log(userData.user);
+        console.log(userData.user.uid);
+        navigate("/");
         setShowLoading(false);
       })
       .catch((err) => {
@@ -66,13 +71,7 @@ export const Login = () => {
 
   return (
     <section className="mx-auto container flex items-center justify-center w-full h-screen bg-white text-slate-900">
-      {showLoading && (
-        <div
-          className={`fixed top-0 left-0 h-screen w-full bg-slate-500/50 pt-44`}
-        >
-          <div className="loader">Loading...</div>
-        </div>
-      )}
+      {showLoading && <Loading />}
       <div
         className={`${popUp} fixed top-0 left-0 h-screen w-full bg-slate-500/50`}
         onClick={() => togglePopUp()}
@@ -152,6 +151,8 @@ export const Signup = () => {
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
+  const navigate = useNavigate();
+
   const [data, setData] = useState({});
   const [authMssg, setAuthMssg] = useState();
   const [popUp, setPopUp] = useState("hidden");
@@ -168,6 +169,7 @@ export const Signup = () => {
       .then((userData) => {
         console.log(userData.user);
         setShowLoading(false);
+        navigate("/");
       })
       .catch((err) => {
         setShowLoading(false);
@@ -182,6 +184,7 @@ export const Signup = () => {
       .then((userData) => {
         console.log(userData.user);
         setShowLoading(false);
+        navigate("/");
       })
       .catch((err) => {
         setShowLoading(false);
@@ -204,13 +207,7 @@ export const Signup = () => {
 
   return (
     <section className="relative mx-auto container flex items-center justify-center w-full h-screen bg-white text-slate-900">
-      {showLoading && (
-        <div
-          className={`fixed top-0 left-0 h-screen w-full bg-slate-500/50 pt-44`}
-        >
-          <div className="loader">Loading...</div>
-        </div>
-      )}
+      {showLoading && <Loading />}
       <div
         className={`${popUp} fixed top-0 left-0 h-screen w-full bg-slate-500/50`}
         onClick={() => togglePopUp()}
