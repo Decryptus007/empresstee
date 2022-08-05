@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, NavLink } from "react-router-dom";
 
 import cakeOne from "../assets/cake-one.jpg";
 import cakeTwo from "../assets/cake-two.jpeg";
@@ -42,13 +42,13 @@ const Landing = () => {
           <span id="logoTxt" className="text-2xl font-bold">
             Empress Tee
           </span>
-          <NavLink to="login">
+          <Link to="login">
             <span className=" md:hidden">
               <FontAwesomeIcon icon="fa-solid fa-user" className="text-xl" />
             </span>
-          </NavLink>
+          </Link>
           <div
-            className={`animate__animated animate__zoomInLeft w-full h-screen z-20 bg-slate-800 fixed top-2 left-0 ${sideBarState} flex-col items-center gap-y-12 pt-24 md:top-0 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
+            className={`animate__animated animate__zoomInLeft w-full h-screen z-20 bg-slate-800 fixed top-0 left-0 ${sideBarState} flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
           >
             <NavLink to="about" className="hover:text-gray-500">
               About Us
@@ -59,13 +59,13 @@ const Landing = () => {
             <NavLink to="/" className="font-bold hover:text-gray-500">
               Cake Product
             </NavLink>
-            <NavLink
+            <Link
               to="login"
               className="p-2 bg-pink-500 hover:text-pink-500 hover:bg-transparent"
             >
               <FontAwesomeIcon icon="fa-solid fa-user" className="mx-2" />
               Account
-            </NavLink>
+            </Link>
           </div>
         </nav>
         <div className="h-full flex flex-col items-center ">
@@ -78,13 +78,13 @@ const Landing = () => {
           <h1 className="text-center pt-20 text-4xl font-bold md:hidden">
             Cooking With Heart, Until it Becomes a Cake
           </h1>
-          <NavLink
+          <Link
             to="login"
             className={`${hideAnime} animate__animated animate__rubberBand animate__delay-1s p-2 mt-2 bg-pink-500 hover:text-pink-500 hover:bg-transparent`}
           >
             Let's See Our Production
             <FontAwesomeIcon icon="fa-solid fa-caret-right" className="mx-2" />
-          </NavLink>
+          </Link>
           <div className="mt-12 p-4 flex flex-col justify-center gap-x-4 -mb-72 w-full md:flex-row">
             <div className="w-full flex flex-wrap flex-col gap-y-4 md:w-1/3 ">
               <img

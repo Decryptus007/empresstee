@@ -1,32 +1,36 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { falseAuth, trueAuth } from "./features/authSlice";
+import { Routes, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
 import Home from "./components/main/Home";
-import { Login, Signup } from "./components/Auth/Auth";
+import { Login } from "./components/Auth/Login";
+import { Signup } from "./components/Auth/Signup";
 import About from "./components/About";
 import Landing from "./components/Landing";
 import Loading from "./components/Aux/Loading";
 
 import "./App.css";
 
+import { app } from "./firebaseConfig";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { notLoading } from "./features/loadingSlice";
+
 library.add(fab, fas, far);
 
 function App() {
   const auth = getAuth();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const authState = useSelector(state => state.authState.value)
+  const authState = useSelector((state) => state.authState.value);
+  const showLoading = useSelector((state) => state.loadingState.value);
 
-  const [paths, setPaths] = useState(
-    <Loading />
-  );
+  const [paths, setPaths] = useState(<Loading />);
 
   const switchRoute = () => {
     switch (authState) {
@@ -36,39 +40,45 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
           </Routes>
         );
         break;
-        case false:
-          setPaths(
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="about" element={<About />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
-            </Routes>
-          );
-          break;
+      case false:
+        setPaths(
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="about" element={<About />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+          </Routes>
+        );
+        break;
 
       default:
-        setPaths(paths)
+        setPaths(paths);
         break;
     }
   };
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(trueAuth());
-        switchRoute();
-      } else {
-        dispatch(falseAuth());
-        switchRoute();
-      }
-    });
-  });
+  // useEffect(() => dispatch(notLoading()));
 
-  return <>{paths}</>;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(trueAuth());
+      switchRoute();
+    } else {
+      dispatch(falseAuth());
+      switchRoute();
+    }
+  });
+  // Not using showLoading for now, will come back for it
+  return (
+    <>
+      {showLoading && <Loading />}
+      {paths}
+    </>
+  );
 }
 
 export default App;
