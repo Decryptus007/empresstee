@@ -47,7 +47,7 @@ export const Login = () => {
     setShowLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userData) => {
-        console.log(userData.user.uid);
+        console.log(userData.user.email);
         navigate("/");
         setShowLoading(false);
       })

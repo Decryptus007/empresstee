@@ -26,8 +26,15 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#aboutImg {
+  background-image: url('./assets/empresstee.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: inset 0px -3rem 3rem #000000ea;
+}
 .loader {
-  color: #ffffff;
+  color: #f70299;
   font-size: 20px;
   margin: 100px auto;
   width: 1em;
@@ -116,5 +123,11 @@ a {
   body {
     background-color: white !important;
     background-image: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #aboutImg {
+    border-radius: 0;
   }
 }

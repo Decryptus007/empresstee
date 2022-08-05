@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import cakeOne from "../assets/cake-one.jpg";
 import cakeTwo from "../assets/cake-two.jpeg";
 import cakeThree from "../assets/cake-three.jpeg";
+import Navbar from "./Aux/Navbar";
 
 const time = new Date().getFullYear();
 
@@ -18,13 +19,13 @@ const Landing = () => {
       case "hidden":
         setSideBarState("flex");
         setHideAnime("hidden");
-        setSideBarCtrl("close")
+        setSideBarCtrl("close");
         break;
 
       default:
         setSideBarState("hidden");
         setHideAnime("inline-block");
-        setSideBarCtrl("bars")
+        setSideBarCtrl("bars");
         break;
     }
   };
@@ -32,42 +33,12 @@ const Landing = () => {
   return (
     <main className="container mx-auto h-auto bg-white">
       <section className="relative px-4 h-1150 bg-slate-800 text-white md:h-800 lg:px-32">
-        <nav className="relative py-4 sticky top-0 left-0 bg-slate-800 w-full flex items-center justify-between">
-          <span
-            className="z-30 cursor-pointer md:hidden"
-            onClick={() => toggleSideBar()}
-          >
-            <FontAwesomeIcon icon={`fa-solid fa-${sideBarCtrl}`} className="text-2xl" />
-          </span>
-          <span id="logoTxt" className="text-2xl font-bold">
-            Empress Tee
-          </span>
-          <Link to="login">
-            <span className=" md:hidden">
-              <FontAwesomeIcon icon="fa-solid fa-user" className="text-xl" />
-            </span>
-          </Link>
-          <div
-            className={`animate__animated animate__zoomInLeft w-full h-screen z-20 bg-slate-800 fixed top-0 left-0 ${sideBarState} flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
-          >
-            <NavLink to="about" className="hover:text-gray-500">
-              About Us
-            </NavLink>
-            <NavLink to="about" className="hover:text-gray-500">
-              Our Service
-            </NavLink>
-            <NavLink to="/" className="font-bold hover:text-gray-500">
-              Cake Product
-            </NavLink>
-            <Link
-              to="login"
-              className="p-2 bg-pink-500 hover:text-pink-500 hover:bg-transparent"
-            >
-              <FontAwesomeIcon icon="fa-solid fa-user" className="mx-2" />
-              Account
-            </Link>
-          </div>
-        </nav>
+        <Navbar
+          home={true}
+          toggleSideBar={toggleSideBar}
+          sideBarCtrl={sideBarCtrl}
+          sideBarState={sideBarState}
+        />
         <div className="h-full flex flex-col items-center ">
           <h1 className="hidden text-5xl pt-20 font-bold md:inline-block">
             Cooking With Heart, Until
@@ -80,7 +51,7 @@ const Landing = () => {
           </h1>
           <Link
             to="login"
-            className={`${hideAnime} animate__animated animate__rubberBand animate__delay-1s p-2 mt-2 bg-pink-500 hover:text-pink-500 hover:bg-transparent`}
+            className={`${hideAnime} block animate__animated animate__rubberBand animate__delay-1s p-2 mt-2 bg-pink-500 hover:text-pink-500 hover:bg-transparent`}
           >
             Let's See Our Production
             <FontAwesomeIcon icon="fa-solid fa-caret-right" className="mx-2" />
@@ -141,7 +112,9 @@ const Landing = () => {
             Oyinkansola Rita
           </span>
         </p>
-        <small className="italic">CE0 <span className="font-bold">Empress Tee</span></small>
+        <small className="italic">
+          CE0 <span className="font-bold">Empress Tee</span>
+        </small>
       </article>
       <footer className="py-2 bg-slate-900 text-white text-center">
         <p>&copy;{time}</p>

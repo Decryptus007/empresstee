@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
+        600: "60vh",
         800: "80vh",
         1150: "115vh",
       },
@@ -13,6 +14,9 @@ module.exports = {
       md: "768px",
       lg: "976px",
       xl: "1440px",
+    },
+    borderRadius: {
+      'about': '3rem',
     },
   },
   plugins: [],
