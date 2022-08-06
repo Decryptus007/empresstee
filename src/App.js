@@ -20,6 +20,7 @@ import "./App.css";
 import { app } from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { notLoading } from "./features/loadingSlice";
+import SavedItems from "./components/main/SavedItem";
 
 library.add(fab, fas, far);
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="saved-items" element={<SavedItems />} />
           </Routes>
         );
         break;

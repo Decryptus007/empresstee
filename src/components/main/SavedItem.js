@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "../Aux/Navbar";
-import ImageSlider from "./ImageSlider/ImageSlider";
 
-const Home = () => {
-
+export default function SavedItems() {
   const [sideBarState, setSideBarState] = useState("hidden");
   const [sideBarCtrl, setSideBarCtrl] = useState("bars");
-  
 
   const toggleSideBar = () => {
     switch (sideBarState) {
@@ -25,16 +22,11 @@ const Home = () => {
   return (
     <main className="relative container mx-auto bg-white">
       <Navbar
-        home={true}
         toggleSideBar={toggleSideBar}
         sideBarCtrl={sideBarCtrl}
         sideBarState={sideBarState}
       />
-      <section className="h-52 md:h-64 lg:h-72">
-        <ImageSlider />
-      </section>
+      <h2 className="text-2xl text-center">Saved Items</h2>
     </main>
   );
-};
-
-export default Home;
+}

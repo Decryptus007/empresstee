@@ -1,0 +1,18 @@
+listAll(listRef)
+    .then((res) => {
+      // res.prefixes.forEach((folderRef) => {
+        // All the prefixes under listRef.
+        // You may call listAll() recursively on them.
+      // });
+      res.items.forEach((itemRef) => {
+        getDownloadURL(itemRef).then((url) => {
+          if (!img.includes(url)) {
+            setImg(img.push(url));
+            console.log(`Image ${img}`);
+          }
+        });
+      });
+    })
+    .catch((error) => {
+      console.log('fail');
+    });

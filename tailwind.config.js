@@ -16,7 +16,10 @@ module.exports = {
       xl: "1440px",
     },
     borderRadius: {
-      'about': '3rem',
+      about: "3rem",
+      full: "9999px",
+      lg: "0.5rem",
+      xl: "0.75rem",
     },
   },
   plugins: [],

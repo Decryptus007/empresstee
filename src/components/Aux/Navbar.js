@@ -45,7 +45,7 @@ export default function Navbar(props) {
   return (
     <>
       <Popup popUp={popUp} togglePopUp={togglePopUp} authMssg={authMssg} />
-      <nav
+      <nav style={{zIndex: 9999}}
         className={`mx-auto p-4 sticky top-0 left-0 text-white ${
           authState ? "bg-pink-500" : "bg-slate-800"
         } w-full flex items-center justify-between`}
@@ -62,12 +62,17 @@ export default function Navbar(props) {
         <span id="logoTxt" className="text-2xl font-bold">
           Empress Tee
         </span>
-        <NavLink to={authState ? "/about" : "/login"}>
-          <span className=" md:hidden">
+        <NavLink to={authState ? "/saved-items" : "/login"}>
+          <span className="relative md:hidden">
             <FontAwesomeIcon
               icon={`fa-solid fa-${authState ? "heart" : "user"}`}
               className="text-xl"
             />
+            {authState && (
+              <sup className="absolute -top-2 -right-2 py-2 px-1 rounded-lg bg-black text-pink-500">
+                1
+              </sup>
+            )}
           </span>
         </NavLink>
         <div
@@ -77,11 +82,27 @@ export default function Navbar(props) {
             props.sideBarState
           } flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
         >
+          {authState && (
+            <NavLink
+              to="/saved-items"
+              className={`${
+                props.about && "font-bold"
+              } hidden relative bg-white text-pink-500 px-2 rounded-lg hover:text-gray-500 md:inline-block`}
+            >
+              <FontAwesomeIcon
+                icon={`fa-solid fa-heart`}
+                className="text-2xl"
+              />
+              <sup className="absolute -top-2 -right-2 py-2 px-1 rounded-lg bg-black text-pink-500">
+                1
+              </sup>
+            </NavLink>
+          )}
           <NavLink
             to="/about"
             className={`${props.about && "font-bold"} hover:text-gray-500`}
           >
-            About Baker
+            About
           </NavLink>
           <NavLink
             to="/about"
