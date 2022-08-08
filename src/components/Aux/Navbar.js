@@ -45,7 +45,7 @@ export default function Navbar(props) {
   return (
     <>
       <Popup popUp={popUp} togglePopUp={togglePopUp} authMssg={authMssg} />
-      <nav style={{zIndex: 9999}}
+      <nav style={{zIndex: 99}}
         className={`mx-auto p-4 sticky top-0 left-0 text-white ${
           authState ? "bg-pink-500" : "bg-slate-800"
         } w-full flex items-center justify-between`}

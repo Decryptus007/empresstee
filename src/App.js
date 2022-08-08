@@ -22,6 +22,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { notLoading } from "./features/loadingSlice";
 import SavedItems from "./components/main/SavedItem";
 import NullPage from "./components/Aux/Nullpage";
+import CustomerChoiceFull from "./components/main/CustomerChoiceFull";
 
 library.add(fab, fas, far);
 
@@ -40,6 +41,7 @@ function App() {
         setPaths(
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="customer-choice" element={<CustomerChoiceFull />} />
             <Route path="about" element={<About />} />
             <Route path="saved-items" element={<SavedItems />} />
             <Route path="*" element={<NullPage />} />
