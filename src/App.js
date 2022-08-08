@@ -8,7 +8,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-import Home from "./components/main/Home";
+import Home from "./components/main/home/Home";
 import { Login } from "./components/Auth/Login";
 import { Signup } from "./components/Auth/Signup";
 import About from "./components/About";
@@ -21,6 +21,7 @@ import { app } from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { notLoading } from "./features/loadingSlice";
 import SavedItems from "./components/main/SavedItem";
+import NullPage from "./components/Aux/Nullpage";
 
 library.add(fab, fas, far);
 
@@ -40,9 +41,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
             <Route path="saved-items" element={<SavedItems />} />
+            <Route path="*" element={<NullPage />} />
           </Routes>
         );
         break;
@@ -53,6 +53,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="*" element={<NullPage />} />
           </Routes>
         );
         break;

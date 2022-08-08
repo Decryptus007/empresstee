@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../Aux/Navbar";
-import ImageSlider from "./ImageSlider/ImageSlider";
+import Navbar from "../../Aux/Navbar";
+import CustomerChoice from "./Customer-Choice";
+import ImageSlider from "./ImageSlider";
 
 const Home = () => {
 
@@ -33,6 +34,8 @@ const Home = () => {
       <section className="h-52 md:h-64 lg:h-72">
         <ImageSlider />
       </section>
+      <h2 className="text-center my-4 p-2 bg-pink-500 text-white font-bold">Cake Galore</h2>
+      <CustomerChoice />
     </main>
   );
 };
