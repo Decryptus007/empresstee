@@ -2,17 +2,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getStorage, ref, getDownloadURL, list } from "firebase/storage";
+import { database } from "../../../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 import cake from "../../../assets/loadingImg.webp";
 import { useDispatch } from "react-redux";
 import { showRoom } from "../../../features/showRoomSlice";
+import {
+  betterViewStore,
+  loadingCakes,
+} from "../../../features/betterViewSlice";
 
 export default function CustomerChoice() {
+  const collectionRef = collection(database, "image-db");
+
   const [img, setImg] = useState([]);
   const [loadInit, setLoadInit] = useState([]);
+  const [betterView, setBetterView] = useState([]);
+  const [num, setNum] = useState();
 
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
   useEffect(() => {
     async function pageTokenExample() {
       // Create a reference under which you want to list
@@ -31,16 +40,39 @@ export default function CustomerChoice() {
       if (img.length === 5) {
         setLoadInit(img);
       }
-      // slice 0 to length and slice from 0 to -4
     }
     pageTokenExample();
   }, [img]);
 
+  function getData(num) {
+    getDocs(collectionRef).then((res) => {
+      res.docs.map((item) => {
+        let data = item.data();
+        setBetterView((prev) => [...prev, data]);
+        return { ...betterView[num] };
+      });
+    });
+  }
+
+  useEffect(() => {
+    let inte = setInterval(() => {
+      if (betterView.length === 0) {
+        return null;
+      } else if (betterView.length !== 0) {
+        dispatch(betterViewStore(betterView[num]));
+        dispatch(loadingCakes(false));
+        clearInterval(inte);
+      }
+    }, 1000);
+  });
+
   const showMore = (src) => {
+    dispatch(loadingCakes(true));
     let split1 = src.slice(0, -57);
     let split2 = split1.slice(95, split1.length);
-    console.log(split2);
-    dispatch(showRoom())
+    setNum(split2 - 1)
+    getData(num);
+    dispatch(showRoom());
   };
 
   return (
