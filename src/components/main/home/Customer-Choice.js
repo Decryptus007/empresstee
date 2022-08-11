@@ -44,55 +44,52 @@ export default function CustomerChoice() {
     pageTokenExample();
   }, [img]);
 
-  function getData(num) {
+  function getData() {
     getDocs(collectionRef).then((res) => {
       res.docs.map((item) => {
         let data = item.data();
-        setBetterView((prev) => [...prev, data]);
-        return { ...betterView[num] };
+        return setBetterView((prev) => [...prev, data]);
       });
     });
   }
 
   useEffect(() => {
-    let inte = setInterval(() => {
+    const inte = setInterval(() => {
       if (betterView.length === 0) {
         return null;
       } else if (betterView.length !== 0) {
         dispatch(betterViewStore(betterView[num]));
         dispatch(loadingCakes(false));
-        clearInterval(inte);
       }
     }, 1000);
-  });
+    return () => clearInterval(inte);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [betterView]);
 
   const showMore = (src) => {
+    setBetterView([]);
     dispatch(loadingCakes(true));
     let split1 = src.slice(0, -57);
     let split2 = split1.slice(95, split1.length);
-    setNum(split2 - 1)
+    setNum(split2 - 1);
     getData(num);
     dispatch(showRoom());
   };
 
   return (
     <section className="">
-      <div className="w-full flex items-center justify-between text-black">
+      <div className="py-2 font-bold px-4 bg-pink-500/30 w-full flex items-center justify-between text-black">
         <small className="text-md">
           <FontAwesomeIcon icon={`fa-solid fa-star`} className="mx-px" />
           Customer's Choice
-          <NavLink
-            to={"/customer-choice"}
-            className="mx-0.5 font-bold p-1 rounded-full bg-pink-500 text-white "
-          >
-            See All
-            <FontAwesomeIcon
-              icon={`fa-solid fa-angle-right`}
-              className="mx-2"
-            />
-          </NavLink>
         </small>
-        <div className="bg-pink-500 w-1/3 md:w-4/6 h-0.5"></div>
+        <NavLink
+          to={"/customer-choice"}
+          className="mx-0.5 text-xs p-1 rounded-full bg-pink-500 text-white "
+        >
+          See All
+          <FontAwesomeIcon icon={`fa-solid fa-angle-right`} className="mx-2" />
+        </NavLink>
       </div>
       <div className="flex overflow-x-scroll py-4">
         <div className="flex flex-nowrap">

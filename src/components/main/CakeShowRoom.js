@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unsetShowRoom } from "../../features/showRoomSlice";
 import Loading from "../Aux/Loading";
@@ -10,6 +10,8 @@ export default function CakeShowRoom() {
   const dispatch = useDispatch();
 
   const [mainFrame, setMainFrame] = useState(null);
+  // const [activeImgId, setActiveImgId] = useState(0);
+  // const [activeImgClass, setActiveImgClass] = useState("");
 
   const betterViewProp = useSelector(
     (state) => state.betterViewProp.value.cakeProps
@@ -18,9 +20,13 @@ export default function CakeShowRoom() {
     (state) => state.betterViewProp.value.loadingProps
   );
 
-  const changeMainFrame = (url) => {
+  const changeMainFrame = (url, e) => {
+    // setActiveImgClass("")
     setMainFrame(url);
+    // e.target.style.border = "2px solid pink"
   };
+
+  useEffect(() => {});
 
   return (
     <section
@@ -52,11 +58,14 @@ export default function CakeShowRoom() {
               <div className="py-2 flex flex-wrap px-2 gap-4 items-center">
                 {betterViewProp.img.map((item, id) => (
                   <img
+                    tabIndex={0}
                     key={id}
                     src={item}
                     alt="cake"
-                    className={`w-24 h-24 md:w-28 md:h-28 object-cover rounded-lg`}
-                    onClick={(e) => changeMainFrame(e.target.src)}
+                    className={`w-24 h-24 md:w-28 md:h-28 object-cover rounded-lg focus:border-2 focus:border-pink-500`}
+                    onClick={(e) => {
+                      changeMainFrame(e.target.src, e);
+                    }}
                   />
                 ))}
               </div>

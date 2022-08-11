@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Popup = (props) => {
+  const [err, setErr] = useState('')
+
+  useEffect(() => {
+    if (props.authMssg) {
+      setErr(props.authMssg.slice(10, props.authMssg.length))
+    } else {
+      setErr('Error Detected')
+    }
+  }, [props.authMssg])
+
   return (
     <>
       <div
@@ -10,7 +20,7 @@ const Popup = (props) => {
       <div
         className={`${props.popUp} animate__animated animate__fadeInUp p-2 fixed flex items-center justify-center top-1/12 left-1/12 w-10/12 h-32 rounded-lg w-full bg-pink-500 text-white`}
       >
-        <p className="font-bold text-sm">{props.authMssg}</p>
+        <p className="font-bold text-sm">{err}</p>
       </div>
     </>
   );

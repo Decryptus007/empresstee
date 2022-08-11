@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../Aux/Navbar";
 import CakeShowRoom from "../CakeShowRoom";
+import Category from "./Category";
 import CustomerChoice from "./Customer-Choice";
 import ImageSlider from "./ImageSlider";
 
@@ -28,7 +29,7 @@ const Home = () => {
   return (
     <>
       {showRoom && <CakeShowRoom />}
-      <main className="relative container mx-auto bg-white">
+      <main className="relative container mx-auto bg-white pb-4">
         <Navbar
           home={true}
           toggleSideBar={toggleSideBar}
@@ -42,6 +43,7 @@ const Home = () => {
           Cake Galore
         </h2>
         <CustomerChoice />
+        <Category />
       </main>
     </>
   );

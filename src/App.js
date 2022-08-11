@@ -23,6 +23,7 @@ import { notLoading } from "./features/loadingSlice";
 import SavedItems from "./components/main/SavedItem";
 import NullPage from "./components/Aux/Nullpage";
 import CustomerChoiceFull from "./components/main/CustomerChoiceFull";
+import CakeCategory from "./components/main/CakeCategory";
 
 library.add(fab, fas, far);
 
@@ -42,6 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="customer-choice" element={<CustomerChoiceFull />} />
+            <Route path="cake-category" element={<CakeCategory />} />
             <Route path="about" element={<About />} />
             <Route path="saved-items" element={<SavedItems />} />
             <Route path="*" element={<NullPage />} />
