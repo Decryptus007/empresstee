@@ -16,6 +16,7 @@ import Landing from "./components/Landing";
 import Loading from "./components/Aux/Loading";
 
 import "./App.css";
+import "animate.css"
 
 import { app } from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -24,6 +25,8 @@ import SavedItems from "./components/main/SavedItem";
 import NullPage from "./components/Aux/Nullpage";
 import CustomerChoiceFull from "./components/main/CustomerChoiceFull";
 import CakeCategory from "./components/main/CakeCategory";
+import FoodCategory from "./components/main/FoodCategory";
+import OtherCakes from "./components/main/OtherCakes";
 
 library.add(fab, fas, far);
 
@@ -44,6 +47,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="customer-choice" element={<CustomerChoiceFull />} />
             <Route path="cake-category" element={<CakeCategory />} />
+            <Route path="food-category" element={<FoodCategory />} />
+            <Route path="other-cakes-category" element={<OtherCakes />} />
             <Route path="about" element={<About />} />
             <Route path="saved-items" element={<SavedItems />} />
             <Route path="*" element={<NullPage />} />

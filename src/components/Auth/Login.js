@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loading from "../Aux/Loading";
@@ -22,11 +22,32 @@ export const Login = () => {
   const [authMssg, setAuthMssg] = useState();
   const [popUp, setPopUp] = useState("hidden");
   const [showLoading, setShowLoading] = useState(false);
+  const [enabledAnimation, setEnabledAnimation] = useState("");
 
   const handleInput = (e) => {
     let newInput = { [e.target.name]: e.target.value };
     setData({ ...data, ...newInput });
   };
+
+  const btnRef = useRef();
+
+  useEffect(() => {
+    // eslint-disable-next-line no-useless-escape
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (Object.keys(data).length > 1) {
+      if (data.email.match(mailformat) && data.password !== "") {
+        btnRef.current.disabled = false;
+        setEnabledAnimation("animate__heartBeat");
+      } else {
+        btnRef.current.disabled = true;
+        setEnabledAnimation("");
+      }
+    } else {
+      btnRef.current.disabled = true;
+      setEnabledAnimation("");
+    }
+  }, [data]);
 
   const googleSignIn = () => {
     setShowLoading(true);
@@ -122,7 +143,8 @@ export const Login = () => {
           />
         </div>
         <button
-          className="w-full bg-pink-500 py-2 mt-6 rounded-full hover:bg-pink-200 text-white"
+          ref={btnRef}
+          className={`animate__animated ${enabledAnimation} w-full bg-pink-500 py-2 mt-6 rounded-full hover:bg-pink-200 text-white disabled:bg-gray-500`}
           onClick={() => signInUser()}
         >
           Login

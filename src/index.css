@@ -33,6 +33,11 @@ a {
   background-repeat: no-repeat;
   box-shadow: inset 0px -3rem 3rem #000000ea;
 }
+
+#career-switch {
+  border-radius: 2rem 2rem 0 0;
+}
+
 .loader {
   color: #f70299;
   font-size: 20px;

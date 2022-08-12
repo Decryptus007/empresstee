@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loading from "../Aux/Loading";
@@ -21,11 +21,37 @@ export const Signup = () => {
   const [authMssg, setAuthMssg] = useState();
   const [popUp, setPopUp] = useState("hidden");
   const [showLoading, setShowLoading] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [enabledAnimation, setEnabledAnimation] = useState("");
+
+  const btnRef = useRef();
 
   const handleInput = (e) => {
     let newInput = { [e.target.name]: e.target.value };
     setData({ ...data, ...newInput });
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-useless-escape
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (Object.keys(data).length > 1) {
+      if (
+        fullName.length > 1 &&
+        data.email.match(mailformat) &&
+        data.password !== ""
+      ) {
+        btnRef.current.disabled = false;
+        setEnabledAnimation("animate__heartBeat");
+      } else {
+        btnRef.current.disabled = true;
+        setEnabledAnimation("");
+      }
+    } else {
+      btnRef.current.disabled = true;
+      setEnabledAnimation("");
+    }
+  }, [data, fullName.length]);
 
   const googleSignIn = () => {
     setShowLoading(true);
@@ -74,7 +100,7 @@ export const Signup = () => {
       {showLoading && <Loading />}
       <Popup popUp={popUp} togglePopUp={togglePopUp} authMssg={authMssg} />
       <form
-        className="px-6 py-10 w-full flex flex-col items-center gap-y-4 h-full md:px-2 md:w-4/6 lg:px-20 lg:w-1/2"
+        className="px-6 py-10 w-full flex flex-col items-center gap-y-4 h-auto overflow-y-auto md:px-2 md:w-4/6 lg:px-20 lg:w-1/2"
         onSubmit={(e) => e.preventDefault()}
       >
         <FontAwesomeIcon
@@ -101,6 +127,16 @@ export const Signup = () => {
           <hr className="text-slate-300 bg-slate-300 w-3/12" />
         </div>
         <div className="flex flex-col w-full">
+          <span className="my-2 font-semibold">Full Name</span>
+          <input
+            className="p-2 border-2 border-slate-300 rounded-full"
+            type={"text"}
+            name="name"
+            placeholder="Empress Tee"
+            onChange={(e) => setFullName(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col w-full">
           <span className="my-2 font-semibold">Email*</span>
           <input
             className="p-2 border-2 border-slate-300 rounded-full"
@@ -121,7 +157,8 @@ export const Signup = () => {
           />
         </div>
         <button
-          className="w-full bg-pink-500 py-2 mt-6 rounded-full hover:bg-pink-200 text-white"
+          ref={btnRef}
+          className={`animate__animated ${enabledAnimation} w-full bg-pink-500 py-2 mt-6 rounded-full hover:bg-pink-200 text-white disabled:bg-gray-600`}
           onClick={() => signUpUser()}
         >
           Sign Up
