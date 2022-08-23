@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { falseAuth, trueAuth } from "./features/authSlice";
+import { falseAuth, setUserData, trueAuth } from "./features/authSlice";
 import { Routes, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -16,7 +16,7 @@ import Landing from "./components/Landing";
 import Loading from "./components/Aux/Loading";
 
 import "./App.css";
-import "animate.css"
+import "animate.css";
 
 import { app } from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -34,7 +34,7 @@ function App() {
   const auth = getAuth();
   const dispatch = useDispatch();
 
-  const authState = useSelector((state) => state.authState.value);
+  const authState = useSelector((state) => state.authState.value.auth);
   const showLoading = useSelector((state) => state.loadingState.value);
 
   const [paths, setPaths] = useState(<Loading />);
@@ -79,9 +79,11 @@ function App() {
     if (user) {
       dispatch(trueAuth());
       switchRoute();
+      dispatch(setUserData(user));
     } else {
       dispatch(falseAuth());
       switchRoute();
+      dispatch(setUserData(""));
     }
   });
   // Not using showLoading for now, will come back for it

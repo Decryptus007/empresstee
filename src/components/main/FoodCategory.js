@@ -1,19 +1,19 @@
-import { collection, getDocs } from "firebase/firestore";
-import { getDownloadURL, getStorage, list, ref } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { betterViewStore, loadingCakes } from "../../features/betterViewSlice";
 import { showRoom } from "../../features/showRoomSlice";
-import { database } from "../../firebaseConfig";
 import Loading from "../Aux/Loading";
 import Navbar from "../Aux/Navbar";
 import CakeShowRoom from "./CakeShowRoom";
 import loadingImg from "../../assets/loadingImg.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { database } from "../../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, getStorage, list, ref } from "firebase/storage";
 
 function FoodCategory() {
   const collectionRef = collection(database, "foods");
-  
+
   const showRoomState = useSelector((state) => state.showRoomState.value);
   const dispatch = useDispatch();
 
@@ -66,7 +66,7 @@ function FoodCategory() {
     let split1 = src.slice(0, -57);
     let split2 = split1.slice(93, split1.length);
     setNum(split2 - 1);
-    getData(num);
+    getData();
     dispatch(showRoom());
   };
 
@@ -80,7 +80,7 @@ function FoodCategory() {
       })
       .catch(() => alert("Slow Network Detected 😢"));
   } 
-  
+
   useEffect(() => {
     const inte = setInterval(() => {
       if (betterView.length === 0) {

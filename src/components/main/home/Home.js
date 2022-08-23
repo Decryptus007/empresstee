@@ -46,17 +46,17 @@ const Home = () => {
         <Category />
         <footer
           id="career-switch"
-          className="fixed bottom-0 left-0 w-full h-16 bg-pink-500 text-white font-bold rounded-t-2xl flex items-center justify-around"
+          className="fixed bottom-0 container left-auto w-full h-16 bg-pink-500 text-white font-bold rounded-t-2xl flex items-center justify-around"
         >
-          <small className="p-2 rounded-lg bg-white/50 text-pink-500 text-lg">
+          <button className="p-2 rounded-lg bg-white text-pink-500 text-lg">
             Cakes
-          </small>
-          <small
-            className="p-2 rounded-lg bg-white text-pink-500 text-lg"
+          </button>
+          <button
+            className="p-2 rounded-lg bg-white/50 text-pink-500 text-lg"
             onClick={() => alert("Still in Beta...")}
           >
             Events
-          </small>
+          </button>
         </footer>
       </main>
     </>

@@ -28,7 +28,7 @@ a {
 }
 
 #aboutImg {
-  background-image: url('./assets/empresstee.jpg');
+  background-image: url("./assets/empresstee.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: inset 0px -3rem 3rem #000000ea;
@@ -36,6 +36,11 @@ a {
 
 #career-switch {
   border-radius: 2rem 2rem 0 0;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  visibility: hidden;
 }
 
 .loader {

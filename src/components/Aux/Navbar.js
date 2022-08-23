@@ -1,25 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAuth, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { falseAuth } from "../../features/authSlice";
+import { falseAuth, setUserData } from "../../features/authSlice";
 import Popup from "./Popup";
+import { doc, getDoc } from "firebase/firestore";
+import { database } from "../../firebaseConfig";
+import { savedItemsLength } from "../../features/betterViewSlice";
 
 export default function Navbar(props) {
   const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const authState = useSelector((state) => state.authState.value);
+  const authState = useSelector((state) => state.authState.value.auth);
 
   const [authMssg, setAuthMssg] = useState();
   const [popUp, setPopUp] = useState("hidden");
 
+  const [storeCount, setStoreCount] = useState(0);
+  const user = useSelector((state) => state.authState.value.userData);
+
+  useEffect(() => {
+    const snapShot =
+      user &&
+      setInterval(() => {
+        (async () => {
+          const docRef = doc(database, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            // console.log("Document data:", docSnap.data());
+            setStoreCount(Object.keys(docSnap.data()).length);
+            dispatch(savedItemsLength(storeCount));
+          }
+        })();
+      }, 1000);
+
+      return () => clearInterval(snapShot)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storeCount, user]);
+
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
-        console.log("SignOut success");
+        dispatch(setUserData(""));
         navigate("/");
         window.location.reload(false);
         dispatch(falseAuth());
@@ -45,7 +70,8 @@ export default function Navbar(props) {
   return (
     <>
       <Popup popUp={popUp} togglePopUp={togglePopUp} authMssg={authMssg} />
-      <nav style={{zIndex: 99}}
+      <nav
+        style={{ zIndex: 99 }}
         className={`mx-auto p-4 sticky top-0 left-0 text-white ${
           authState ? "bg-pink-500" : "bg-slate-800"
         } w-full flex items-center justify-between`}
@@ -70,7 +96,7 @@ export default function Navbar(props) {
             />
             {authState && (
               <sup className="absolute -top-2 -right-2 py-2 px-1 rounded-lg bg-black text-pink-500">
-                1
+                {storeCount}
               </sup>
             )}
           </span>
@@ -94,7 +120,7 @@ export default function Navbar(props) {
                 className="text-2xl"
               />
               <sup className="absolute -top-2 -right-2 py-2 px-1 rounded-lg bg-black text-pink-500">
-                1
+                {storeCount}
               </sup>
             </NavLink>
           )}

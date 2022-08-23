@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
-    cakeProps: '',
+    cakeProps: {},
     loadingProps: true,
+    savedItemsProps: 0,
   },
 };
 
@@ -17,8 +18,11 @@ export const betterViewSlice = createSlice({
     loadingCakes: (state, actions) => {
       state.value = {...state.value, loadingProps: actions.payload}
     },
+    savedItemsLength: (state, actions) => {
+      state.value = {...state.value, savedItemsProps: actions.payload}
+    },
   }
 });
 
-export const { betterViewStore, loadingCakes } = betterViewSlice.actions
+export const { betterViewStore, loadingCakes, savedItemsLength } = betterViewSlice.actions
 export default betterViewSlice.reducer;

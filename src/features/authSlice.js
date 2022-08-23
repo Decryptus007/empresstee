@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: null,
+  value: {
+    auth: null,
+    userData: "",
+  },
 };
 
 export const authSlice = createSlice({
@@ -9,13 +12,16 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     trueAuth: (state) => {
-      state.value = true;
+      state.value = { ...state.value, auth: true };
     },
     falseAuth: (state) => {
-      state.value = false;
+      state.value = { ...state.value, auth: false };
+    },
+    setUserData: (state, actions) => {
+      state.value = { ...state.value, userData: actions.payload };
     },
   },
 });
 
-export const { trueAuth, falseAuth } = authSlice.actions
+export const { trueAuth, falseAuth, setUserData } = authSlice.actions;
 export default authSlice.reducer;
