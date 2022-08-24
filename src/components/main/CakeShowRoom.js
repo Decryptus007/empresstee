@@ -24,9 +24,6 @@ export default function CakeShowRoom() {
     (state) => state.betterViewProp.value.cakeProps
   );
 
-  const storeCount = useSelector(
-    (state) => state.betterViewProp.value.savedItemsProps
-  );
   const loadingCakes = useSelector(
     (state) => state.betterViewProp.value.loadingProps
   );
@@ -44,12 +41,12 @@ export default function CakeShowRoom() {
   useEffect(() => {
     Object.keys(betterViewProp).length &&
       setSavedData({
-        ["savedItem" + storeCount]: {
+        ["savedItem" + betterViewProp.desc]: {
           img: betterViewProp.img[0],
           title: betterViewProp.desc,
         },
       });
-  }, [betterViewProp, storeCount]);
+  }, [betterViewProp, betterViewProp.desc]);
 
   useEffect(() => {
     (async function () {

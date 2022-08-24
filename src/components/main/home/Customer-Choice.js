@@ -5,7 +5,7 @@ import { getStorage, ref, getDownloadURL, list } from "firebase/storage";
 import { database } from "../../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
-import cake from "../../../assets/loadingImg.webp";
+import cake from "../../../assets/loader.gif";
 import { useDispatch } from "react-redux";
 import { showRoom } from "../../../features/showRoomSlice";
 import {

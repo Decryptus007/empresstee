@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL, list } from "firebase/storage";
 
-import loadinImg from "../../../assets/loadingImg.webp";
+import loadinImg from "../../../assets/loader.gif";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -41,8 +41,6 @@ export default function ImageSlider() {
     }
     pageTokenExample();
   }, [img]);
-
-
 
   return (
     <Swiper

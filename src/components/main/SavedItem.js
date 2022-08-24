@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Aux/Navbar";
-import { doc, getDoc } from "firebase/firestore";
+import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 // eslint-disable-next-line no-unused-vars
 import { app, database } from "../../firebaseConfig";
 import { useSelector } from "react-redux";
@@ -15,6 +15,8 @@ export default function SavedItems() {
   const [sideBarState, setSideBarState] = useState("hidden");
   const [sideBarCtrl, setSideBarCtrl] = useState("bars");
   const [checkItems, setCheckItems] = useState([]);
+  const [noItems, setNoItems] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const toggleSideBar = () => {
     switch (sideBarState) {
@@ -36,18 +38,38 @@ export default function SavedItems() {
 
       if (docSnap.exists()) {
         let objItems = docSnap.data();
+        let objKeys = Object.keys(objItems);
+        if (objKeys.length < 1) {
+          setNoItems(true);
+          setCheckItems([]);
+        }
+        setCheckItems([]);
         for (const iterator in objItems) {
           if (Object.hasOwnProperty.call(objItems, iterator)) {
             const el = objItems[iterator];
             setCheckItems((prev) => [...prev, el]);
           }
         }
+      } else {
+        setNoItems(true);
+      }
+
+      if (docSnap.data().length < 1) {
+        setNoItems(true);
       }
     };
     name();
     return () => (name = "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refresh]);
+
+  async function deleteData(name) {
+    await updateDoc(docRef, {
+      ["savedItem" + name]: deleteField(),
+    });
+
+    await setRefresh(!refresh);
+  }
 
   return (
     <main className="relative container mx-auto bg-white">
@@ -58,9 +80,17 @@ export default function SavedItems() {
       />
       <h2 className="text-lg text-center">Saved Items</h2>
       <div className="flex gap-y-4 flex-col items-center justify-center p-2 mt-4">
+        {noItems && (
+          <p className="text-lg text-gray-700 font-semibold">
+            No Saved Items Yet.
+          </p>
+        )}
         {checkItems.length ? (
           checkItems.map((item, id) => (
-            <div key={id} className="flex items-center justify-between p-2 rounded-lg bg-gray-100 mx-auto w-full h-24 md:w-96 md:h-32">
+            <div
+              key={id}
+              className="flex items-center justify-between p-2 rounded-lg bg-gray-100 mx-auto w-full h-24 md:w-96 md:h-32"
+            >
               <img
                 src={item.img}
                 alt="Saved Items"
@@ -74,7 +104,10 @@ export default function SavedItems() {
                   <button className="p-2 rounded-lg text-pink-500 text-xs border border-pink-500 text-white font-bold md:text-sm">
                     Share
                   </button>
-                  <button className="p-2 rounded-lg bg-pink-500 text-xs text-white font-bold md:text-sm">
+                  <button
+                    className="p-2 rounded-lg bg-pink-500 text-xs text-white font-bold md:text-sm"
+                    onClick={() => deleteData(item.title)}
+                  >
                     Remove
                   </button>
                 </div>
@@ -84,7 +117,7 @@ export default function SavedItems() {
         ) : (
           <Loading />
         )}
-        </div>
+      </div>
     </main>
   );
 }

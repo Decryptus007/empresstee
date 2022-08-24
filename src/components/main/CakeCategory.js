@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Aux/Navbar";
 import Loading from "../Aux/Loading";
-import loadingImg from "../../assets/loadingImg.webp";
+import loadingImg from "../../assets/loader.gif";
 import { getDownloadURL, getStorage, list, ref } from "firebase/storage";
 import { database } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";

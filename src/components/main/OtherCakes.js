@@ -8,7 +8,7 @@ import { database } from "../../firebaseConfig";
 import Loading from "../Aux/Loading";
 import Navbar from "../Aux/Navbar";
 import CakeShowRoom from "./CakeShowRoom";
-import loadingImg from "../../assets/loadingImg.webp";
+import loadingImg from "../../assets/loader.gif";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function OtherCakes() {
