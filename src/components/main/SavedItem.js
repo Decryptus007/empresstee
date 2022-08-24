@@ -67,8 +67,24 @@ export default function SavedItems() {
     await updateDoc(docRef, {
       ["savedItem" + name]: deleteField(),
     });
-
     await setRefresh(!refresh);
+  }
+
+  function shareImage(data, dataTwo) {
+    let shareData = {
+      title: dataTwo,
+      text: "Hey! Check out this product I found on Empress Tee Galore",
+      url: data,
+    };
+    (async function () {
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          console.log(`Error: ${err}`);
+        }
+      }
+    })();
   }
 
   return (
@@ -101,7 +117,10 @@ export default function SavedItems() {
                   {item.title}
                 </div>
                 <div className="flex gap-4 items-center justify-around">
-                  <button className="p-2 rounded-lg text-pink-500 text-xs border border-pink-500 text-white font-bold md:text-sm">
+                  <button
+                    className="p-2 rounded-lg text-pink-500 text-xs border border-pink-500 text-white font-bold md:text-sm"
+                    onClick={() => shareImage(item.img, item.title)}
+                  >
                     Share
                   </button>
                   <button
