@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../Aux/Navbar";
 import CakeShowRoom from "../CakeShowRoom";
 import Category from "./Category";
@@ -7,6 +8,7 @@ import CustomerChoice from "./Customer-Choice";
 import ImageSlider from "./ImageSlider";
 
 const Home = () => {
+  const navigate = useNavigate()
   const showRoom = useSelector((state) => state.showRoomState.value);
 
   const [sideBarState, setSideBarState] = useState("hidden");
@@ -53,7 +55,7 @@ const Home = () => {
           </button>
           <button
             className="p-2 rounded-lg bg-white/50 text-pink-500 text-lg"
-            onClick={() => alert("Still in Beta...")}
+            onClick={() => navigate("events")}
           >
             Events
           </button>

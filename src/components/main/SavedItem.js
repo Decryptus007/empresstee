@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../Aux/Navbar";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 // eslint-disable-next-line no-unused-vars
@@ -17,6 +18,8 @@ export default function SavedItems() {
   const [checkItems, setCheckItems] = useState([]);
   const [noItems, setNoItems] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [openImg, setOpenImg] = useState(false);
+  const [img, setImg] = useState("");
 
   const toggleSideBar = () => {
     switch (sideBarState) {
@@ -87,8 +90,26 @@ export default function SavedItems() {
     })();
   }
 
+  function enlargeImg(img) {
+    setOpenImg(true);
+    setImg(img);
+  }
+
   return (
     <main className="relative container mx-auto bg-white">
+      {openImg && (
+        <div
+          style={{ zIndex: 100 }}
+          className="flex items-center justify-center z-30 fixed top-4 left-auto w-full h-full bg-pink-500/20"
+        >
+          <FontAwesomeIcon
+            icon={`fa-solid fa-close`}
+            className="fixed left-4 text-3xl font-bold text-black"
+            onClick={() => setOpenImg(false)}
+          />
+          <img src={img} alt="Cake" className="w-52 h-52 object-cover" />
+        </div>
+      )}
       <Navbar
         toggleSideBar={toggleSideBar}
         sideBarCtrl={sideBarCtrl}
@@ -111,6 +132,7 @@ export default function SavedItems() {
                 src={item.img}
                 alt="Saved Items"
                 className="object-cover h-full w-24 md:w-28"
+                onClick={(e) => enlargeImg(e.target.src)}
               />
               <div className="flex flex-col w-3/4 items-end justify-between h-full">
                 <div className="text-sm font-semibold md:text-md">

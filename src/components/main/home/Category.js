@@ -54,7 +54,7 @@ export default function Category() {
             Foods & Snacks
           </p>
         </div>
-        <div className="cursor-pointer relative w-40 h-44 md:w-44 md:h-48 shadow-xl rounded-lg">
+        {/* <div className="cursor-pointer relative w-40 h-44 md:w-44 md:h-48 shadow-xl rounded-lg">
           <img
             src={cakeCat}
             alt="cake"
@@ -63,7 +63,7 @@ export default function Category() {
           <p className="absolute bottom-0 left-0 text-center py-10 font-bold text-white text-xl bg-gradient-to-t from-pink-500/50 to-pink-200/20 w-full">
             Cakes
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

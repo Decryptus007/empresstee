@@ -27,6 +27,7 @@ import CustomerChoiceFull from "./components/main/CustomerChoiceFull";
 import CakeCategory from "./components/main/CakeCategory";
 import FoodCategory from "./components/main/FoodCategory";
 import OtherCakes from "./components/main/OtherCakes";
+import EventHome from "./components/Events/EventHome";
 
 library.add(fab, fas, far);
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="other-cakes-category" element={<OtherCakes />} />
             <Route path="about" element={<About />} />
             <Route path="saved-items" element={<SavedItems />} />
+            <Route path="events" element={<EventHome />} />
             <Route path="*" element={<NullPage />} />
           </Routes>
         );

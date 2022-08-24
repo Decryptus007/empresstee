@@ -102,7 +102,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <article className="pt-44 pb-10 px-4 text-center text-slate-900 md:pt-72 lg:px-32">
+      <article className="mt-96 pb-10 px-4 text-center text-slate-900 md:pt-72 lg:px-32">
         <h1 className="font-bold text-3xl md:text-4xl">
           You deserve delicious <span className="inline-block">c🧁ke</span> and
           we will deliver the unique experience to you
