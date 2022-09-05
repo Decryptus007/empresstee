@@ -76,7 +76,7 @@ export default function SavedItems() {
   function shareImage(data, dataTwo) {
     let shareData = {
       title: dataTwo,
-      text: `Hey! Check out this product I found on Empress Tee Galore. \nYou can view more products on https://empresstee.vercel.app`,
+      text: `Hey! Check out this product I found on Empress Tee Galore. \nYou can view more products on https://empresstee.vercel.app \n \n`,
       url: data,
     };
     (async function () {
