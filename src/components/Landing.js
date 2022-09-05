@@ -31,7 +31,7 @@ const Landing = () => {
   };
 
   return (
-    <main className="container mx-auto h-auto bg-white">
+    <main id="landing" className="container mx-auto h-auto bg-white">
       <section className="relative px-4 h-1150 bg-slate-800 text-white md:h-800 lg:px-32">
         <Navbar
           home={true}
@@ -102,7 +102,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <article className="mt-96 pb-10 px-4 text-center text-slate-900 md:pt-72 lg:px-32">
+      <article className="mt-96 pb-10 px-4 text-center text-slate-900 md:mt-12 md:pt-72 lg:px-32">
         <h1 className="font-bold text-3xl md:text-4xl">
           You deserve delicious <span className="inline-block">c🧁ke</span> and
           we will deliver the unique experience to you

@@ -37,7 +37,7 @@ export default function Navbar(props) {
         })();
       }, 1000);
 
-      return () => clearInterval(snapShot)
+    return () => clearInterval(snapShot);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeCount, user]);
 
@@ -111,9 +111,7 @@ export default function Navbar(props) {
           {authState && (
             <NavLink
               to="/saved-items"
-              className={`${
-                props.about && "font-bold"
-              } hidden relative bg-white text-pink-500 px-2 rounded-lg hover:text-gray-500 md:inline-block`}
+              className={` hidden relative bg-white text-pink-500 px-2 rounded-lg hover:text-gray-500 md:inline-block`}
             >
               <FontAwesomeIcon
                 icon={`fa-solid fa-heart`}
@@ -131,8 +129,8 @@ export default function Navbar(props) {
             About
           </NavLink>
           <NavLink
-            to="/about"
-            className={`${props.about && "font-bold"} hover:text-gray-500`}
+            to="/services"
+            className={`${props.services && "font-bold"} hover:text-gray-500`}
           >
             Our Service
           </NavLink>

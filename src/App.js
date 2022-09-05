@@ -28,6 +28,7 @@ import CakeCategory from "./components/main/CakeCategory";
 import FoodCategory from "./components/main/FoodCategory";
 import OtherCakes from "./components/main/OtherCakes";
 import EventHome from "./components/Events/EventHome";
+import Services from "./components/Services";
 
 library.add(fab, fas, far);
 
@@ -46,11 +47,12 @@ function App() {
         setPaths(
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="services" element={<Services />} />
             <Route path="customer-choice" element={<CustomerChoiceFull />} />
             <Route path="cake-category" element={<CakeCategory />} />
             <Route path="food-category" element={<FoodCategory />} />
             <Route path="other-cakes-category" element={<OtherCakes />} />
-            <Route path="about" element={<About />} />
             <Route path="saved-items" element={<SavedItems />} />
             <Route path="events" element={<EventHome />} />
             <Route path="*" element={<NullPage />} />
@@ -62,6 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="about" element={<About />} />
+            <Route path="services" element={<Services />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="*" element={<NullPage />} />

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'animate.css';
 
 const About = () => {
-  const authState = useSelector((state) => state.authState.value);
+  const authState = useSelector((state) => state.authState.value.auth);
 
   const [sideBarState, setSideBarState] = useState("hidden");
   const [sideBarCtrl, setSideBarCtrl] = useState("bars");
