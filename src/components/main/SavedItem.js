@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navbar from "../Aux/Navbar";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 // eslint-disable-next-line no-unused-vars
 import { app, database } from "../../firebaseConfig";
@@ -8,32 +7,18 @@ import { useSelector } from "react-redux";
 
 // import cake from "../../assets/cake-category.png";
 import Loading from "../Aux/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function SavedItems() {
   const user = useSelector((state) => state.authState.value.userData);
   const docRef = doc(database, "users", user.uid);
+  const navigate = useNavigate()
 
-  const [sideBarState, setSideBarState] = useState("hidden");
-  const [sideBarCtrl, setSideBarCtrl] = useState("bars");
   const [checkItems, setCheckItems] = useState([]);
   const [noItems, setNoItems] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [openImg, setOpenImg] = useState(false);
   const [img, setImg] = useState("");
-
-  const toggleSideBar = () => {
-    switch (sideBarState) {
-      case "hidden":
-        setSideBarState("flex");
-        setSideBarCtrl("close");
-        break;
-
-      default:
-        setSideBarState("hidden");
-        setSideBarCtrl("bars");
-        break;
-    }
-  };
 
   useEffect(() => {
     let name = async function () {
@@ -110,12 +95,13 @@ export default function SavedItems() {
           <img src={img} alt="Cake" className="w-52 h-52 object-cover" />
         </div>
       )}
-      <Navbar
-        toggleSideBar={toggleSideBar}
-        sideBarCtrl={sideBarCtrl}
-        sideBarState={sideBarState}
-      />
-      <h2 className="text-lg text-center">Saved Items</h2>
+      <div className="bg-pink-500 mx-auto p-4 sticky top-0 left-0 text-white flex items-center ">
+        <FontAwesomeIcon icon={`fa-solid fa-angle-left`}
+          className="w-1/12 text-3xl font-bold"
+          onClick={() => navigate("/")}
+        />
+        <p className="text-center w-11/12">Saved Items</p>
+      </div>
       <div className="flex gap-y-4 flex-col items-center justify-center p-2 mt-4">
         {noItems && (
           <p className="text-lg text-gray-700 font-semibold">

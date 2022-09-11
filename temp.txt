@@ -16,3 +16,6 @@ listAll(listRef)
     .catch((error) => {
       console.log('fail');
     });
+
+
+    TELL THE USER THAT THE APPLICATION MIGHT ME SLOW DEPENDING ON THEIR CONNECTION IN A MODAL

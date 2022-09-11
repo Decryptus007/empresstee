@@ -58,46 +58,16 @@ const Landing = () => {
           </Link>
           <div className="mt-12 p-4 flex flex-col justify-center gap-x-4 -mb-72 w-full md:flex-row">
             <div className="w-full flex flex-wrap flex-col gap-y-4 md:w-1/3 ">
-              <img
-                className="object-cover h-52"
-                src={cakeOne}
-                loading="lazy"
-                alt="cake"
-              />
-              <img
-                className="hidden object-cover h-52 md:block"
-                src={cakeTwo}
-                loading="lazy"
-                alt="cake"
-              />
+              <img className="object-cover h-52" src={cakeOne} alt="cake" />
+              <img className="hidden object-cover h-52 md:block" src={cakeTwo} alt="cake" />
             </div>
             <div className="w-full flex justify-between mt-2 gap-x-2 md:gap-x-0 md:w-1/3 md:flex-col md:justify-center md:mt-0 md:gap-y-4">
-              <img
-                className="w-1/2 object-cover h-52 md:w-full"
-                src={cakeOne}
-                loading="lazy"
-                alt="cake"
-              />
-              <img
-                className="w-1/2 h-52 object-cover md:h-40 md:w-full"
-                src={cakeTwo}
-                loading="lazy"
-                alt="cake"
-              />
+              <img className="w-1/2 object-cover h-52 md:w-full" src={cakeOne} alt="cake" />
+              <img className="w-1/2 h-52 object-cover md:h-40 md:w-full" src={cakeTwo} alt="cake" />
             </div>
             <div className="w-full flex gap-x-2 mt-2 md:mt-0 md:gap-x-0 md:gap-y-4 md:flex-col md:w-1/3">
-              <img
-                className="w-1/2 h-52 object-cover md:h-64 md:w-full"
-                src={cakeThree}
-                loading="lazy"
-                alt="cake"
-              />
-              <img
-                className="w-1/2 h-52 object-cover md:h-40 md:w-full"
-                src={cakeOne}
-                loading="lazy"
-                alt="cake"
-              />
+              <img className="w-1/2 h-52 object-cover md:h-64 md:w-full" src={cakeThree} alt="cake" />
+              <img className="w-1/2 h-52 object-cover md:h-40 md:w-full" src={cakeOne} alt="cake" />
             </div>
           </div>
         </div>

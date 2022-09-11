@@ -53,7 +53,7 @@ export const Login = () => {
     setShowLoading(true);
     signInWithPopup(auth, googleProvider)
       .then((userData) => {
-        console.log(userData.user);
+        // console.log(userData.user);
         navigate("/");
         setShowLoading(false);
       })
@@ -68,7 +68,7 @@ export const Login = () => {
     setShowLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userData) => {
-        console.log(userData.user.email);
+        // console.log(userData.user.email);
         navigate("/");
         setShowLoading(false);
       })

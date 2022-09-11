@@ -4,10 +4,10 @@ import { getAuth, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { falseAuth, setUserData } from "../../features/authSlice";
-import Popup from "./Popup";
 import { doc, getDoc } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { savedItemsLength } from "../../features/betterViewSlice";
+import Loading from "./Loading";
 
 export default function Navbar(props) {
   const auth = getAuth();
@@ -16,10 +16,8 @@ export default function Navbar(props) {
 
   const authState = useSelector((state) => state.authState.value.auth);
 
-  const [authMssg, setAuthMssg] = useState();
-  const [popUp, setPopUp] = useState("hidden");
-
   const [storeCount, setStoreCount] = useState(0);
+  const [loggingOut, setLoggingOut] = useState(false);
   const user = useSelector((state) => state.authState.value.userData);
 
   useEffect(() => {
@@ -42,39 +40,28 @@ export default function Navbar(props) {
   }, [storeCount, user]);
 
   const signOutUser = () => {
-    signOut(auth)
-      .then(() => {
-        dispatch(setUserData(""));
-        navigate("/");
-        window.location.reload(false);
-        dispatch(falseAuth());
-      })
-      .catch((err) => {
-        setAuthMssg(err.message);
-        setPopUp("block");
-      });
+    setLoggingOut(true)
+    setTimeout(() => {
+      signOut(auth)
+        .then(() => {
+          setTimeout(() => {
+            dispatch(setUserData(""));
+            dispatch(falseAuth());
+            navigate("/");
+            setLoggingOut(false)
+          }, 2000);
+        })
+    }, 2000);
   };
 
-  const togglePopUp = () => {
-    switch (popUp) {
-      case "hidden":
-        setPopUp("block");
-        break;
-
-      default:
-        setPopUp("hidden");
-        break;
-    }
-  };
 
   return (
     <>
-      <Popup popUp={popUp} togglePopUp={togglePopUp} authMssg={authMssg} />
+      {loggingOut && <Loading />}
       <nav
         style={{ zIndex: 99 }}
-        className={`mx-auto p-4 sticky top-0 left-0 text-white ${
-          authState ? "bg-pink-500" : "bg-slate-800"
-        } w-full flex items-center justify-between`}
+        className={`mx-auto p-4 sticky top-0 left-0 text-white ${authState ? "bg-pink-500" : "bg-slate-800"
+          } w-full flex items-center justify-between`}
       >
         <span
           className="z-30 cursor-pointer md:hidden"
@@ -102,11 +89,9 @@ export default function Navbar(props) {
           </span>
         </NavLink>
         <div
-          className={`animate__animated animate__zoomInLeft w-full h-screen z-20 ${
-            authState ? "bg-pink-500" : "bg-slate-800"
-          } fixed top-0 left-0 ${
-            props.sideBarState
-          } flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
+          className={`animate__animated animate__zoomInLeft w-full h-screen z-20 ${authState ? "bg-pink-500" : "bg-slate-800"
+            } fixed top-0 left-0 ${props.sideBarState
+            } flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
         >
           {authState && (
             <NavLink
