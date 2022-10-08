@@ -31,7 +31,7 @@ const Landing = () => {
   };
 
   return (
-    <main id="landing" className="container mx-auto h-auto bg-white">
+    <main id="landing" className="mx-auto h-auto bg-white 2xl:container">
       <section className="relative px-4 h-1150 bg-slate-800 text-white md:h-800 lg:px-32">
         <Navbar
           home={true}

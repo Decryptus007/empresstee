@@ -25,7 +25,7 @@ function EventHome() {
   };
 
   return (
-    <main className="animate__animated animate__slideInRight container mx-auto bg-white pb-8 h-screen">
+    <main className="animate__animated animate__slideInRight mx-auto bg-white pb-8 min-h-[93vh] 2xl:container lg:min-h-screen">
       <EventNavbar
         home={true}
         toggleSideBar={toggleSideBar}
@@ -38,7 +38,7 @@ function EventHome() {
 
       <footer
         id="career-switch"
-        className="fixed bottom-14 container left-auto w-full h-16 bg-cyan-500 text-white font-bold rounded-t-2xl flex items-center justify-around"
+        className="fixed bottom-0 left-auto w-full h-16 bg-cyan-500 text-white font-bold rounded-t-2xl flex items-center justify-around"
       >
         <button
           className="p-2 rounded-lg bg-white/50 text-cyan-500 text-lg"

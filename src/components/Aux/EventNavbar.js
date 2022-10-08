@@ -87,7 +87,7 @@ export default function EventNavbar(props) {
           Empress Tee
         </span>
         <div
-          className={`animate__animated animate__zoomInLeft w-full h-screen z-20"bg-cyan-500" fixed top-0 left-0 ${props.sideBarState} flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
+          className={`animate__animated animate__zoomInLeft w-full h-screen z-20 bg-cyan-500 fixed top-0 left-0 ${props.sideBarState} flex-col items-center gap-y-12 pt-24 md:pt-0 md:gap-y-0 md:justify-end md:h-auto md:relative md:bg-transparent md:gap-x-4 md:w-2/3 md:flex-row md:flex`}
         >
           <NavLink
             to="/events"
@@ -131,7 +131,7 @@ export default function EventNavbar(props) {
             {authState ? "Home" : "Cake Product"}
             </NavLink> */}
           <button
-            className="p-2 text-pink-500 rounded-lg bg-white hover:text-pink-500 hover:bg-transparent"
+            className="p-2 text-cyan-500 rounded-lg bg-white hover:text-cyan-600 hover:bg-transparent"
             onClick={() => (authState ? signOutUser() : navigate("/login"))}
           >
             <FontAwesomeIcon icon="fa-solid fa-user" className="mx-2" />
